@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class HelloPage extends StatefulWidget{
-  String title;
+  late String title;
 
   HelloPage({super.key, required String title}){
     this.title = title;
   }
 
-  State<HelloPage> createState() => HelloPageState();
+  State<HelloPage> createState() => _HelloPageState();
 }
 
-class HelloPageState extends State<HelloPage> {
+class _HelloPageState extends State<HelloPage> {
   String messge = 'Hello World';
 
   Widget build(BuildContext context){
@@ -24,11 +24,11 @@ class HelloPageState extends State<HelloPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){
-         setState(() {
-          messge = "헬로 월드";
-         });
-      ),
+        onPressed: () {
+          setState(() {
+            messge = "헬로 월드";
+          });
+        }),
     );
   }
 
