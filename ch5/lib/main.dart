@@ -1,3 +1,5 @@
+import 'package:ch5/CheckboxTest.dart';
+import 'package:ch5/RadiolistTest.dart';
 import 'package:ch5/TextFieldTest.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,9 @@ class MyApp extends StatelessWidget {
     MaterialApp m =new MaterialApp(
       title: 'Flutter Demo',
       theme: t,
-      home: TextFieldText(),
+      //home: CheckboxTest(),
+      //home: TextFieldTest(),
+      home: RadiolistTest(),
     );
 
     return m;
