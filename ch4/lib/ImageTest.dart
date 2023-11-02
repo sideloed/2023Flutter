@@ -12,7 +12,7 @@ class _ImageTestState extends State<ImageTest> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ButtonTest'),
+          title: Text('ImageTest'),
           backgroundColor: Colors.deepPurple,
         ),
         body: Image.network('http://bit.ly/2Pvz4t8')
