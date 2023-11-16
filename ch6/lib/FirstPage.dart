@@ -10,7 +10,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  String resultStr = '';
+  String? resultStr = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class _FirstPageState extends State<FirstPage> {
       ),
       body: Column(
         children: [
-          Text(resultStr),
+          Text(resultStr!),
           SizedBox(
             height: 40,
           ),
@@ -28,12 +28,11 @@ class _FirstPageState extends State<FirstPage> {
             child: Text('다음 페이지로 이동'),
             onPressed: () async {
               final person = new Person('홍길동',30);
-              final result = await Navigator.push(
+              final result = await Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(builder: (context)=>SecondPage(person: person)),
-              );
+                  "/second");
               setState(() {
-                resultStr = result;
+                //resultStr = result.name?.'';
               });
             },
           ),
