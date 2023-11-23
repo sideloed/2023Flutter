@@ -127,6 +127,7 @@ class Page1 extends StatelessWidget {
     return CarouselSlider(
        options: CarouselOptions(
          height: 500.0,
+
        ),
       items: imageItems.map((path)
       {
