@@ -3,11 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class StopWatchPage extends StatelessWidget {
-  const StopWatchPage({super.key});
-
-}
-
-class _StopWatchPageState extends State<StopWatchPage> {
   Timer? _timer;
 
   var _time = 0;
@@ -15,13 +10,17 @@ class _StopWatchPageState extends State<StopWatchPage> {
 
   List<String> _lapTimes = [];
 
-  void dispose(){
-    _timer?.cancel();
-    super.dispose();
-}
+  const StopWatchPage({super.key});
+
+
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('스탑 워치'),
