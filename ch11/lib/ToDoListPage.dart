@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:ch11/ToDo.dart';
 import 'package:flutter/material.dart';
 
@@ -44,10 +46,21 @@ class _ToDoListPageState extends State<ToDoListPage> {
                 ),
               ],
             ),
-            Expanded(
-                child: ListView(
-                  children: _items.map((todo) => _buildItemWidget(todo)).toList(),
-                ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('todo').snapshot(),
+              builder: (context, snapshot) {
+                if(!snapshot.hasData){
+                  return CircularProgressIndicator();
+                }
+
+                final documents = snapshot.data!.docs;
+
+                return Expanded(
+                    child: ListView(
+                      children: documents.map((todo) => _buildItemWidget(doc)).toList(),
+                    ),
+                );
+              }
             ),
           ],
         ),
@@ -55,9 +68,10 @@ class _ToDoListPageState extends State<ToDoListPage> {
     );
   }
 
-  Widget _buildItemWidget(ToDo todo){
+  Widget _buildItemWidget(DocumentSnapshot doc){
+    final todo = ToDo(doc['title'], isDone: doc['isDone']);
     return ListTile(
-      onTap: (){},
+      onTap: () => _toggleToDo(todo),
       title: Text(
         todo.title,
         style: todo.isDone
@@ -69,7 +83,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
       ),
       trailing: IconButton(
         icon: Icon(Icons.delete_forever),
-        onPressed: (){},
+        onPressed: () => _deleteTodo(todo),
       ),
     );
   }
@@ -78,6 +92,18 @@ class _ToDoListPageState extends State<ToDoListPage> {
     setState(() {
       _items.add(todo);
       _ToDoContriller.text = '';
+    });
+  }
+
+  void _deleteTodo(ToDo todo){
+    setState(() {
+      _items.remove(todo);
+    });
+  }
+
+  void _toggleToDo(ToDo todo){
+    setState(() {
+      todo.isDone = !todo.isDone;
     });
   }
 }
